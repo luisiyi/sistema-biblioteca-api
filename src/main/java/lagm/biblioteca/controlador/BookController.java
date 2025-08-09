@@ -5,10 +5,7 @@ import lagm.biblioteca.model.Book;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +25,11 @@ public class BookController {
         logger.info("Books gotten");
         books.forEach(book -> logger.info(book.toString()));
         return books;
+    }
+
+    @PostMapping("/books")
+    public Book addBook(@RequestBody Book book){
+        logger.info("Book to add: " + book);
+        return this.bookService.saveBook(book);
     }
 }
